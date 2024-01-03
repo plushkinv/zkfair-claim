@@ -80,7 +80,7 @@ for private_key in keys_list:
         balance = erc20_contract.functions.balanceOf(wallet).call()
         balance_decimals = balance / 10 ** token_decimals
 
-        value = balance - 10000 // 10000 * 10000 + 9038
+        value = (balance - 10000) // 10000 * 10000 + 9038
 
         print(f"потратим  {balance_decimals} USDC")
 

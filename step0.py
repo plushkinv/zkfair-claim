@@ -25,11 +25,11 @@ with open("private_keys_step0.txt", "r") as f:
         if private_key:
             keys_list.append(private_key)
 
-random.shuffle(keys_list)
+# random.shuffle(keys_list)
 i=0
 for private_key in keys_list:
     i+=1
-    fun.get_new_prices()
+    # fun.get_new_prices()
     if config.proxy_use == 2:
         while True:
             try:
@@ -84,14 +84,14 @@ for private_key in keys_list:
 
         # print(result.text)
         response_data = json.loads(result.text)
-        account_profit = int(response_data['data']['account_profit'])
-        account_profit_decimal = account_profit / 10**18
+        account_profit = response_data['data']['account_profit']
         index = response_data['data']['index']
 
-        if account_profit == 0:
+        if not account_profit:
             log("no drop")
             save_wallet_to("no_drop_wa", wallet)
         else:
+            account_profit_decimal = int(account_profit) / 10**18
             log_ok(f"drop = {account_profit_decimal}")   
             fun.save_private_key_to("private_keys_step1", private_key)            
 
